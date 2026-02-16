@@ -121,7 +121,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         // Show all content immediately (no initial hiding)
         const animatedElements = document.querySelectorAll(
-            '.skill-category, .experience-item, .project-card'
+            '.skill-category, .experience-item, .project-card, .ai-card'
         );
         
         // Pre-render with visible state, then add subtle entrance
@@ -170,53 +170,6 @@
             }
         });
     }
-
-    // ============================================
-    // EMAIL COPY TO CLIPBOARD
-    // ============================================
-    function setupEmailCopy() {
-        const emailButtons = document.querySelectorAll('[id^="emailCopyBtn"]');
-        const email = 'dhananjay.kolte.fidel@gmail.com';
-        
-        emailButtons.forEach(button => {
-            button.addEventListener('click', async function() {
-                try {
-                    await navigator.clipboard.writeText(email);
-                    
-                    // Add copied class for visual feedback
-                    button.classList.add('copied');
-                    
-                    // Reset after 2 seconds
-                    setTimeout(() => {
-                        button.classList.remove('copied');
-                    }, 2000);
-                } catch (err) {
-                    // Fallback for older browsers
-                    const textArea = document.createElement('textarea');
-                    textArea.value = email;
-                    textArea.style.position = 'fixed';
-                    textArea.style.opacity = '0';
-                    document.body.appendChild(textArea);
-                    textArea.select();
-                    try {
-                        document.execCommand('copy');
-                        button.classList.add('copied');
-                        setTimeout(() => {
-                            button.classList.remove('copied');
-                        }, 2000);
-                    } catch (fallbackErr) {
-                        console.error('Failed to copy email:', fallbackErr);
-                    }
-                    document.body.removeChild(textArea);
-                }
-            });
-        });
-    }
-    
-    // Initialize email copy on page load
-    document.addEventListener('DOMContentLoaded', function() {
-        setupEmailCopy();
-    });
 
     // ============================================
     // ACTIVE NAVIGATION LINK HIGHLIGHTING
